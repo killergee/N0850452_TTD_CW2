@@ -1,6 +1,7 @@
-module Lib
-    ( someFunc
-    ) where
+module Lib where
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+incomeTax :: Int -> Int 
+incomeTax income = 
+    if income < 12570
+        then 0
+        else (income - 12570) `div` 5
