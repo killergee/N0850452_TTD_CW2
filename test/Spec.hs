@@ -15,14 +15,17 @@ allTests = TestList [
     testBaselineTax,
     testHigherlineTax,
     testUserTakings,
-    testAdditionallineTax
+    testAdditionallineTax,
+    testNationalTaxLower,
+    testNationalTaxMiddle,
+    testNationalTaxHigher
   ]
 
 testTaxNothing :: Test
-testTaxNothing = TestCase (assertEqual "No tax is required" 0 (incomeTax 10000))
+testTaxNothing = TestCase (assertEqual "No tax is required" 0 (incomeTax 9050))
 
 testBaselineTax :: Test
-testBaselineTax = TestCase (assertEqual "The baseline tax rate" 1486 (incomeTax 20000))
+testBaselineTax = TestCase (assertEqual "The baseline tax rate" 4486 (incomeTax 35000))
 
 testHigherlineTax :: Test 
 testHigherlineTax = TestCase (assertEqual "The higherline tax rate" 15432 (incomeTax 70000))
@@ -32,3 +35,13 @@ testAdditionallineTax = TestCase (assertEqual "The additionalline tax rate" 6993
 
 testUserTakings :: Test
 testUserTakings =  TestCase (assertEqual "What the user is allowed" defaultUsersTakings (userTakings 40000))
+
+testNationalTaxLower :: Test
+testNationalTaxLower =  TestCase (assertEqual "National insurance to pay lower band " 0 (nationalInsuranceTax 7000))
+
+testNationalTaxMiddle :: Test
+testNationalTaxMiddle =  TestCase (assertEqual "National insurance to pay middle band " 3325 (nationalInsuranceTax 25000))
+
+
+testNationalTaxHigher :: Test
+testNationalTaxHigher =  TestCase (assertEqual "National insurance to pay high band " 7700 (nationalInsuranceTax 220000))
